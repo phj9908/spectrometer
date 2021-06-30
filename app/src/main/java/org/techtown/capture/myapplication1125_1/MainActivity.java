@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity
     private CameraBridgeViewBase mOpenCvCameraView;
 
     public native int[] Returnroi(long matAddrInput); //img_roi Rect 리턴
-    //public native int Return_roi(long matAddrInput); //roi 디버깅 용
-    public native double[] imageprocessing(long matAddrInput); // 나중에 데이터 리턴만 하던지 데이터 리턴도 포함할건지 수정
+    //public native int Return_roi(long matAddrInput); //roi 디버깅 
+    public native double[] imageprocessing(long matAddrInput); 
 
     static {
         System.loadLibrary("opencv_java4");
@@ -67,12 +67,9 @@ public class MainActivity extends AppCompatActivity
     private boolean click=false;
     private boolean frame=false;
 
-    //private TextView counttxt;
     TimerTask timerTask;
     Timer timer = new Timer();
 
-    //double[][]   data_return= new double[100][3];
-    //static double[] data_array= new double[300];
     static double sum_B=0;
     static double sum_G=0;
     static double sum_R=0;
@@ -152,7 +149,7 @@ public class MainActivity extends AppCompatActivity
         mOpenCvCameraView.setCameraIndex(0); // front-camera(1),  back-camera(0)
     }
 
-    public void detect_roi(Rect roi){
+    public void detect_roi(Rect roi){ // 스펙트럼의 바운더리 박스 Rect roi에 할당
 
         int[] roiArray = null;
 
@@ -188,7 +185,7 @@ public class MainActivity extends AppCompatActivity
                 job.run();
             }
         };
-        timer.scheduleAtFixedRate(timerTask,0 ,20); // 10ns마다 작업이 실행되게 한다.
+        timer.scheduleAtFixedRate(timerTask,0 ,20); // 20ns마다 작업이 실행되게 한다.
     }
 
     private void stopTimerTask()
